@@ -69,8 +69,8 @@ public class ClassifierActivity extends CameraActivity implements OnImageAvailab
       return;
     }
 
-    previewWidth = 28;//size.getWidth()
-    previewHeight = 28;//size.getHeight()
+    previewWidth = size.getWidth();
+    previewHeight = size.getHeight();
 
     sensorOrientation = rotation - getScreenOrientation();
     LOGGER.i("Camera orientation relative to screen canvas: %d", sensorOrientation);

@@ -194,14 +194,14 @@ public abstract class Classifier {
 
     // Reads type and shape of input and output tensors, respectively.
     int imageTensorIndex = 0;
-    int[] imageShape = tflite.getInputTensor(imageTensorIndex).shape(); // {1, height, width, 3} lo coge bien
+    int[] imageShape = tflite.getInputTensor(imageTensorIndex).shape(); // {1, height, width, 1}
     imageSizeY = imageShape[1];
     imageSizeX = imageShape[2];
     DataType imageDataType = tflite.getInputTensor(imageTensorIndex).dataType();
     int probabilityTensorIndex = 0;
     int[] probabilityShape =
-        tflite.getOutputTensor(probabilityTensorIndex).shape(); // {1, NUM_CLASSES}
-    DataType probabilityDataType = tflite.getOutputTensor(probabilityTensorIndex).dataType(); //10?
+        tflite.getOutputTensor(probabilityTensorIndex).shape(); // {1, 10}
+    DataType probabilityDataType = tflite.getOutputTensor(probabilityTensorIndex).dataType();
 
     // Creates the input tensor.
     inputImageBuffer = new TensorImage(imageDataType);
@@ -222,7 +222,7 @@ public abstract class Classifier {
 
     Trace.beginSection("loadImage");
     long startTimeForLoadImage = SystemClock.uptimeMillis();
-    inputImageBuffer = loadImage(bitmap, sensorOrientation); //Algo va mal. El bitmap
+    inputImageBuffer = loadImage(bitmap, sensorOrientation);
     long endTimeForLoadImage = SystemClock.uptimeMillis();
     Trace.endSection();
     LOGGER.v("Timecost to load the image: " + (endTimeForLoadImage - startTimeForLoadImage));
