@@ -194,7 +194,7 @@ public abstract class Classifier {
 
     // Reads type and shape of input and output tensors, respectively.
     int imageTensorIndex = 0;
-    int[] imageShape = tflite.getInputTensor(imageTensorIndex).shape(); // {1, height, width, 1}
+    int[] imageShape = {1, 28, 28, 4}; //tflite.getInputTensor(imageTensorIndex).shape(); // {1, height, width, 1}
     imageSizeY = imageShape[1];
     imageSizeX = imageShape[2];
     DataType imageDataType = tflite.getInputTensor(imageTensorIndex).dataType();
@@ -232,7 +232,7 @@ public abstract class Classifier {
     long startTimeForReference = SystemClock.uptimeMillis();
     // TODO: Run TFLite inference
     //java.lang.IllegalArgumentException: Cannot copy to a TensorFlowLite tensor (serving_default_conv2d_input:0) with 3136 (?) bytes from a Java Buffer with 9408 bytes. (Input. Classifier -> 198,199|290)
-    tflite.run(inputImageBuffer.getBuffer(), outputProbabilityBuffer.getBuffer().rewind());
+    tflite.run(inputImageBuffer.getBuffer(), outputProbabilityBuffer.getBuffer().rewind()); //ERROR
     long endTimeForReference = SystemClock.uptimeMillis();
     Trace.endSection();
     LOGGER.v("Timecost to run model inference: " + (endTimeForReference - startTimeForReference));

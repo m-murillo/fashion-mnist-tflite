@@ -81,7 +81,8 @@ public class ClassifierActivity extends CameraActivity implements OnImageAvailab
 
   @Override
   protected void processImage() {
-    rgbFrameBitmap.setPixels(getRgbBytes(), 0, previewWidth, 0, 0, previewWidth, previewHeight);
+    //rgbFrameBitmap.getPixels(getRgbBytes(), 0, previewWidth, 0, 0, previewWidth, previewHeight);
+    rgbFrameBitmap.setPixels(getRgbBytes(), 0, 28, 0, 0, 28, 28);
     final int cropSize = Math.min(previewWidth, previewHeight);
 
     runInBackground(
